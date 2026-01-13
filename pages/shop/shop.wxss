@@ -1,0 +1,201 @@
+/* pages/shop/shop.wxss */
+
+.card-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-item {
+  margin-bottom: 30rpx;
+}
+
+.label {
+  display: block;
+  font-size: 28rpx;
+  color: #666;
+  margin-bottom: 15rpx;
+}
+
+.avatar-upload {
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 75rpx;
+  border: 2rpx dashed #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+}
+
+.avatar-placeholder {
+  font-size: 60rpx;
+  color: #999;
+}
+
+.image-upload {
+  width: 100%;
+  height: 300rpx;
+  border: 2rpx dashed #ddd;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.upload-image {
+  width: 100%;
+  height: 100%;
+}
+
+.upload-placeholder {
+  color: #999;
+  font-size: 28rpx;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 150rpx;
+  padding: 20rpx;
+  border: 2rpx solid #e0e0e0;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+}
+
+.btn-small {
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  background-color: #ff6b6b;
+  color: #fff;
+  border-radius: 8rpx;
+  border: none;
+}
+
+.kitchen-list {
+  margin-top: 20rpx;
+}
+
+.kitchen-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25rpx;
+  background-color: #f9f9f9;
+  border-radius: 10rpx;
+  margin-bottom: 20rpx;
+}
+
+.kitchen-info {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.kitchen-name {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-right: 15rpx;
+}
+
+.kitchen-badge {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  background-color: #e0e0e0;
+  color: #666;
+  border-radius: 10rpx;
+  margin-right: 10rpx;
+}
+
+.kitchen-badge.current {
+  background-color: #ff6b6b;
+  color: #fff;
+}
+
+.kitchen-actions {
+  display: flex;
+  gap: 15rpx;
+}
+
+.btn-text {
+  font-size: 26rpx;
+  color: #ff6b6b;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.btn-text.danger {
+  color: #e74c3c;
+}
+
+.switch-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx 0;
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 80%;
+  max-width: 600rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.modal-actions .btn {
+  flex: 1;
+}
+
+.admin-list {
+  max-height: 400rpx;
+  overflow-y: auto;
+}
+
+.admin-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.admin-item:last-child {
+  border-bottom: none;
+}

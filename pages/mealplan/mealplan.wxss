@@ -1,0 +1,205 @@
+/* pages/mealplan/mealplan.wxss */
+
+.date-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30rpx;
+  background-color: #fff;
+  border-radius: 15rpx;
+  margin-bottom: 30rpx;
+}
+
+.date-nav {
+  width: 60rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  color: #ff6b6b;
+  font-weight: bold;
+}
+
+.date-display {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.date-text {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+
+.date-weekday {
+  font-size: 24rpx;
+  color: #999;
+  margin-top: 5rpx;
+}
+
+.meal-plan {
+  margin-top: 20rpx;
+}
+
+.meal-section {
+  margin-bottom: 40rpx;
+}
+
+.meal-label {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+  display: block;
+}
+
+.meal-recipes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15rpx;
+}
+
+.recipe-tag {
+  padding: 12rpx 24rpx;
+  background-color: #ff6b6b;
+  color: #fff;
+  border-radius: 30rpx;
+  font-size: 26rpx;
+}
+
+.recipe-tag.add {
+  background-color: #e0e0e0;
+  color: #666;
+  border: 2rpx dashed #999;
+}
+
+.plan-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 40rpx;
+  padding-top: 30rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.plan-actions .btn {
+  flex: 1;
+}
+
+.empty-plan {
+  text-align: center;
+  padding: 60rpx 0;
+  color: #999;
+}
+
+.week-plan-list {
+  margin-top: 20rpx;
+}
+
+.week-plan-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.week-plan-item:last-child {
+  border-bottom: none;
+}
+
+.week-date {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.week-meals {
+  font-size: 26rpx;
+  color: #999;
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 80%;
+  max-width: 600rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-content.large {
+  width: 90%;
+  max-width: 700rpx;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.recipes-scroll {
+  max-height: 500rpx;
+}
+
+.recipe-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.recipe-item:last-child {
+  border-bottom: none;
+}
+
+.recipe-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+}
+
+.recipe-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.recipe-category {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.modal-actions .btn {
+  flex: 1;
+}

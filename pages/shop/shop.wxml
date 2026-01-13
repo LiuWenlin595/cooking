@@ -1,0 +1,98 @@
+<!--pages/shop/shop.wxml-->
+<view class="container">
+  <!-- 店铺信息编辑 -->
+  <view class="card">
+    <view class="card-title">店铺信息</view>
+    
+    <view class="form-item">
+      <text class="label">店铺头像</text>
+      <view class="avatar-upload" bindtap="chooseAvatar">
+        <image wx:if="{{shopInfo.avatar}}" class="avatar" src="{{shopInfo.avatar}}" mode="aspectFill"></image>
+        <view wx:else class="avatar-placeholder">+</view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="label">背景图片</text>
+      <view class="image-upload" bindtap="chooseBackground">
+        <image wx:if="{{shopInfo.background}}" class="upload-image" src="{{shopInfo.background}}" mode="aspectFill"></image>
+        <view wx:else class="upload-placeholder">
+          <text>点击上传</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="label">店铺名称</text>
+      <input class="input" value="{{shopInfo.name}}" bindinput="onNameInput" placeholder="请输入店铺名称" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">店铺简介</text>
+      <textarea class="textarea" value="{{shopInfo.intro}}" bindinput="onIntroInput" placeholder="请输入店铺简介" maxlength="200"></textarea>
+    </view>
+
+    <button class="btn btn-primary" bindtap="saveShopInfo">保存店铺信息</button>
+  </view>
+
+  <!-- 厨房管理 -->
+  <view class="card">
+    <view class="card-title">
+      <text>厨房管理</text>
+      <button class="btn-small" bindtap="addKitchen">+ 添加厨房</button>
+    </view>
+
+    <view class="kitchen-list">
+      <view class="kitchen-item" wx:for="{{shopInfo.kitchens}}" wx:key="id">
+        <view class="kitchen-info">
+          <text class="kitchen-name">{{item.name}}</text>
+          <text class="kitchen-badge" wx:if="{{item.isDefault}}">默认</text>
+          <text class="kitchen-badge current" wx:if="{{item.id === shopInfo.currentKitchenId}}">当前</text>
+        </view>
+        <view class="kitchen-actions">
+          <button class="btn-text" wx:if="{{item.id !== shopInfo.currentKitchenId}}" bindtap="switchKitchen" data-id="{{item.id}}">切换</button>
+          <button class="btn-text" bindtap="manageAdmins" data-id="{{item.id}}">管理员</button>
+          <button class="btn-text danger" wx:if="{{!item.isDefault}}" bindtap="deleteKitchen" data-id="{{item.id}}">删除</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 订单通知设置 -->
+  <view class="card">
+    <view class="card-title">订单通知设置</view>
+    <view class="switch-item">
+      <text>接收新订单通知</text>
+      <switch checked="{{notificationEnabled}}" bindchange="toggleNotification" />
+    </view>
+  </view>
+</view>
+
+<!-- 添加厨房弹窗 -->
+<view class="modal" wx:if="{{showAddKitchen}}" bindtap="closeModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-title">添加厨房</view>
+    <input class="input" placeholder="请输入厨房名称" value="{{newKitchenName}}" bindinput="onKitchenNameInput" />
+    <view class="modal-actions">
+      <button class="btn btn-secondary" bindtap="closeModal">取消</button>
+      <button class="btn btn-primary" bindtap="confirmAddKitchen">确定</button>
+    </view>
+  </view>
+</view>
+
+<!-- 管理员管理弹窗 -->
+<view class="modal" wx:if="{{showAdminModal}}" bindtap="closeAdminModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-title">管理员管理</view>
+    <view class="admin-list">
+      <view class="admin-item" wx:for="{{currentKitchenAdmins}}" wx:key="index">
+        <text>{{item.nickName || item.openid}}</text>
+        <button class="btn-text danger" bindtap="removeAdmin" data-index="{{index}}">移除</button>
+      </view>
+    </view>
+    <view class="modal-actions">
+      <button class="btn btn-primary" bindtap="addAdmin">添加管理员</button>
+      <button class="btn btn-secondary" bindtap="closeAdminModal">关闭</button>
+    </view>
+  </view>
+</view>

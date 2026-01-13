@@ -1,0 +1,93 @@
+<!--pages/ingredient/ingredient.wxml-->
+<view class="container">
+  <!-- 快捷操作 -->
+  <view class="action-bar">
+    <button class="btn btn-primary" bindtap="addIngredient">+ 添加食材</button>
+    <button class="btn btn-success" bindtap="viewAvailableRecipes">查看可做菜谱</button>
+  </view>
+
+  <!-- 食材列表 -->
+  <view class="ingredient-list" wx:if="{{ingredients.length > 0}}">
+    <view class="ingredient-item" wx:for="{{ingredients}}" wx:key="id">
+      <view class="ingredient-info">
+        <text class="ingredient-name">{{item.name}}</text>
+        <view class="ingredient-details">
+          <text class="ingredient-quantity">数量: {{item.quantity}} {{item.unit || ''}}</text>
+          <text class="ingredient-expiry" wx:if="{{item.expiryDate}}">
+            保质期: {{item.expiryDate}}
+            <text class="expiry-warning" wx:if="{{item.daysLeft !== undefined && item.daysLeft <= 3}}">
+              ({{item.daysLeft <= 0 ? '已过期' : '还剩' + item.daysLeft + '天'}})
+            </text>
+          </text>
+        </view>
+      </view>
+      <view class="ingredient-actions">
+        <button class="btn-small" bindtap="editIngredient" data-id="{{item.id}}">编辑</button>
+        <button class="btn-small btn-danger" bindtap="deleteIngredient" data-id="{{item.id}}">删除</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:else>
+    <view class="empty-icon">🥬</view>
+    <text>暂无食材</text>
+    <button class="btn btn-primary" bindtap="addIngredient" style="margin-top: 30rpx;">添加第一个食材</button>
+  </view>
+</view>
+
+<!-- 添加/编辑食材弹窗 -->
+<view class="modal" wx:if="{{showModal}}" bindtap="closeModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-title">{{isEdit ? '编辑食材' : '添加食材'}}</view>
+    
+    <view class="form-item">
+      <text class="label">食材名称 <text class="required">*</text></text>
+      <input class="input" value="{{currentIngredient.name}}" bindinput="onNameInput" placeholder="请输入食材名称" />
+    </view>
+
+    <view class="form-row">
+      <view class="form-item-half">
+        <text class="label">数量</text>
+        <input class="input" type="number" value="{{currentIngredient.quantity}}" bindinput="onQuantityInput" placeholder="0" />
+      </view>
+      <view class="form-item-half">
+        <text class="label">单位</text>
+        <input class="input" value="{{currentIngredient.unit}}" bindinput="onUnitInput" placeholder="如：个、斤、kg" />
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="label">保质期</text>
+      <picker mode="date" value="{{currentIngredient.expiryDate}}" bindchange="onExpiryDateChange">
+        <view class="picker">
+          {{currentIngredient.expiryDate || '请选择保质期'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="modal-actions">
+      <button class="btn btn-secondary" bindtap="closeModal">取消</button>
+      <button class="btn btn-primary" bindtap="saveIngredient">保存</button>
+    </view>
+  </view>
+</view>
+
+<!-- 可做菜谱弹窗 -->
+<view class="modal" wx:if="{{showRecipesModal}}" bindtap="closeRecipesModal">
+  <view class="modal-content large" catchtap="stopPropagation">
+    <view class="modal-title">根据现有食材可做的菜谱</view>
+    <scroll-view class="recipes-scroll" scroll-y="true">
+      <view class="recipe-item" wx:for="{{availableRecipes}}" wx:key="id" bindtap="viewRecipe" data-id="{{item.id}}">
+        <image class="recipe-image" src="{{item.image || '/images/default-recipe.png'}}" mode="aspectFill"></image>
+        <view class="recipe-info">
+          <text class="recipe-name">{{item.name}}</text>
+          <text class="recipe-category">{{item.category}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="modal-actions">
+      <button class="btn btn-secondary" bindtap="closeRecipesModal">关闭</button>
+    </view>
+  </view>
+</view>

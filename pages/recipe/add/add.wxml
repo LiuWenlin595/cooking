@@ -1,0 +1,128 @@
+<!--pages/recipe/add/add.wxml-->
+<view class="container">
+  <view class="card">
+    <view class="card-title">{{isEdit ? '编辑菜谱' : '添加菜谱'}}</view>
+
+    <!-- 菜谱图片 -->
+    <view class="form-item">
+      <text class="label">菜谱图片</text>
+      <view class="image-upload" bindtap="chooseImage">
+        <image wx:if="{{recipe.image}}" class="upload-image" src="{{recipe.image}}" mode="aspectFill"></image>
+        <view wx:else class="upload-placeholder">
+          <text>+ 点击上传</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 基本信息 -->
+    <view class="form-item">
+      <text class="label">菜名 <text class="required">*</text></text>
+      <input class="input" value="{{recipe.name}}" bindinput="onNameInput" placeholder="请输入菜名" />
+    </view>
+
+    <view class="form-item">
+      <text class="label">分类</text>
+      <picker mode="selector" range="{{categories}}" value="{{categoryIndex}}" bindchange="onCategoryChange">
+        <view class="picker">
+          {{recipe.category || '请选择分类'}}
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-item">
+      <text class="label">描述</text>
+      <textarea class="textarea" value="{{recipe.description}}" bindinput="onDescriptionInput" placeholder="请输入菜谱描述" maxlength="200"></textarea>
+    </view>
+
+    <!-- 详细信息 -->
+    <view class="form-row">
+      <view class="form-item-half">
+        <text class="label">份量（人）</text>
+        <input class="input" type="number" value="{{recipe.servings}}" bindinput="onServingsInput" placeholder="1" />
+      </view>
+      <view class="form-item-half">
+        <text class="label">制作时长</text>
+        <input class="input" value="{{recipe.cookTime}}" bindinput="onCookTimeInput" placeholder="如：30分钟" />
+      </view>
+    </view>
+
+    <view class="form-item">
+      <text class="label">难度</text>
+      <picker mode="selector" range="{{difficulties}}" value="{{difficultyIndex}}" bindchange="onDifficultyChange">
+        <view class="picker">
+          {{recipe.difficulty || '请选择难度'}}
+        </view>
+      </picker>
+    </view>
+
+    <!-- 用料 -->
+    <view class="form-item">
+      <view class="label-row">
+        <text class="label">用料 <text class="required">*</text></text>
+        <button class="btn-small" bindtap="addIngredient">+ 添加</button>
+      </view>
+      <view class="ingredient-list">
+        <view class="ingredient-item" wx:for="{{recipe.ingredients}}" wx:key="index" wx:for-index="idx">
+          <input class="input-small" placeholder="食材名称" value="{{item.name || item}}" bindinput="onIngredientNameInput" data-index="{{idx}}" />
+          <input class="input-small" placeholder="用量" value="{{item.amount}}" bindinput="onIngredientAmountInput" data-index="{{idx}}" />
+          <button class="btn-delete" bindtap="removeIngredient" data-index="{{idx}}">删除</button>
+        </view>
+      </view>
+    </view>
+
+    <!-- 制作步骤 -->
+    <view class="form-item">
+      <view class="label-row">
+        <text class="label">制作步骤 <text class="required">*</text></text>
+        <button class="btn-small" bindtap="addStep">+ 添加</button>
+      </view>
+      <view class="step-list">
+        <view class="step-item" wx:for="{{recipe.steps}}" wx:key="index" wx:for-index="idx">
+          <view class="step-header">
+            <text class="step-number">步骤 {{idx + 1}}</text>
+            <button class="btn-delete" bindtap="removeStep" data-index="{{idx}}">删除</button>
+          </view>
+          <textarea class="textarea-small" placeholder="描述制作步骤" value="{{item.text || item}}" bindinput="onStepTextInput" data-index="{{idx}}"></textarea>
+          <view class="step-image-upload" bindtap="chooseStepImage" data-index="{{idx}}">
+            <image wx:if="{{item.image}}" class="step-image" src="{{item.image}}" mode="aspectFill"></image>
+            <view wx:else class="upload-placeholder-small">+ 添加图片</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 营养信息 -->
+    <view class="form-item">
+      <text class="label">营养信息（可选）</text>
+      <view class="nutrition-form">
+        <view class="nutrition-row">
+          <text class="nutrition-label">热量（kcal）</text>
+          <input class="input-small" type="number" value="{{recipe.nutrition.calories}}" bindinput="onNutritionInput" data-key="calories" placeholder="0" />
+        </view>
+        <view class="nutrition-row">
+          <text class="nutrition-label">蛋白质（g）</text>
+          <input class="input-small" type="number" value="{{recipe.nutrition.protein}}" bindinput="onNutritionInput" data-key="protein" placeholder="0" />
+        </view>
+        <view class="nutrition-row">
+          <text class="nutrition-label">脂肪（g）</text>
+          <input class="input-small" type="number" value="{{recipe.nutrition.fat}}" bindinput="onNutritionInput" data-key="fat" placeholder="0" />
+        </view>
+        <view class="nutrition-row">
+          <text class="nutrition-label">碳水（g）</text>
+          <input class="input-small" type="number" value="{{recipe.nutrition.carbs}}" bindinput="onNutritionInput" data-key="carbs" placeholder="0" />
+        </view>
+      </view>
+    </view>
+
+    <!-- 其他设置 -->
+    <view class="form-item">
+      <view class="switch-item">
+        <text>设为必点菜</text>
+        <switch checked="{{recipe.isRequired}}" bindchange="onRequiredChange" />
+      </view>
+    </view>
+
+    <!-- 保存按钮 -->
+    <button class="btn btn-primary" bindtap="saveRecipe">保存菜谱</button>
+  </view>
+</view>

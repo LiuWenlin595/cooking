@@ -1,0 +1,109 @@
+<!--pages/mealplan/mealplan.wxml-->
+<view class="container">
+  <!-- 日期选择 -->
+  <view class="date-selector">
+    <view class="date-nav" bindtap="prevDate">
+      <text>‹</text>
+    </view>
+    <picker mode="date" value="{{selectedDate}}" bindchange="onDateChange">
+      <view class="date-display">
+        <text class="date-text">{{formattedDate}}</text>
+        <text class="date-weekday">{{weekday}}</text>
+      </view>
+    </picker>
+    <view class="date-nav" bindtap="nextDate">
+      <text>›</text>
+    </view>
+  </view>
+
+  <!-- 今日计划 -->
+  <view class="card">
+    <view class="card-title">
+      <text>今日菜单</text>
+      <button class="btn-small" bindtap="addMealPlan">+ 安排</button>
+    </view>
+
+    <view class="meal-plan" wx:if="{{currentPlan}}">
+      <!-- 早餐 -->
+      <view class="meal-section">
+        <text class="meal-label">🌅 早餐</text>
+        <view class="meal-recipes">
+          <view class="recipe-tag" wx:for="{{currentPlan.breakfast}}" wx:key="id" bindtap="viewRecipe" data-id="{{item.id}}">
+            {{item.name}}
+          </view>
+          <view class="recipe-tag add" wx:if="{{currentPlan.breakfast.length === 0}}" bindtap="addMeal" data-type="breakfast">
+            + 添加
+          </view>
+        </view>
+      </view>
+
+      <!-- 午餐 -->
+      <view class="meal-section">
+        <text class="meal-label">☀️ 午餐</text>
+        <view class="meal-recipes">
+          <view class="recipe-tag" wx:for="{{currentPlan.lunch}}" wx:key="id" bindtap="viewRecipe" data-id="{{item.id}}">
+            {{item.name}}
+          </view>
+          <view class="recipe-tag add" wx:if="{{currentPlan.lunch.length === 0}}" bindtap="addMeal" data-type="lunch">
+            + 添加
+          </view>
+        </view>
+      </view>
+
+      <!-- 晚餐 -->
+      <view class="meal-section">
+        <text class="meal-label">🌙 晚餐</text>
+        <view class="meal-recipes">
+          <view class="recipe-tag" wx:for="{{currentPlan.dinner}}" wx:key="id" bindtap="viewRecipe" data-id="{{item.id}}">
+            {{item.name}}
+          </view>
+          <view class="recipe-tag add" wx:if="{{currentPlan.dinner.length === 0}}" bindtap="addMeal" data-type="dinner">
+            + 添加
+          </view>
+        </view>
+      </view>
+
+      <!-- 操作按钮 -->
+      <view class="plan-actions">
+        <button class="btn btn-primary" bindtap="createOrderFromPlan">一键下单</button>
+        <button class="btn btn-secondary" bindtap="clearPlan">清空计划</button>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-plan" wx:else>
+      <text>今日暂无安排</text>
+      <button class="btn btn-primary" bindtap="addMealPlan" style="margin-top: 20rpx;">开始安排</button>
+    </view>
+  </view>
+
+  <!-- 本周计划预览 -->
+  <view class="card" wx:if="{{weekPlans.length > 0}}">
+    <view class="card-title">本周计划</view>
+    <view class="week-plan-list">
+      <view class="week-plan-item" wx:for="{{weekPlans}}" wx:key="date">
+        <text class="week-date">{{item.dateText}}</text>
+        <text class="week-meals">{{item.mealCount}}道菜</text>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 选择菜谱弹窗 -->
+<view class="modal" wx:if="{{showRecipeModal}}" bindtap="closeRecipeModal">
+  <view class="modal-content large" catchtap="stopPropagation">
+    <view class="modal-title">选择菜谱</view>
+    <scroll-view class="recipes-scroll" scroll-y="true">
+      <view class="recipe-item" wx:for="{{recipes}}" wx:key="id" bindtap="selectRecipe" data-id="{{item.id}}">
+        <image class="recipe-image" src="{{item.image || '/images/default-recipe.png'}}" mode="aspectFill"></image>
+        <view class="recipe-info">
+          <text class="recipe-name">{{item.name}}</text>
+          <text class="recipe-category">{{item.category}}</text>
+        </view>
+      </view>
+    </scroll-view>
+    <view class="modal-actions">
+      <button class="btn btn-secondary" bindtap="closeRecipeModal">取消</button>
+    </view>
+  </view>
+</view>

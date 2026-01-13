@@ -1,0 +1,71 @@
+<!--pages/order/detail/detail.wxml-->
+<view class="container">
+  <!-- 订单信息 -->
+  <view class="card">
+    <view class="order-header">
+      <text class="order-id">订单 #{{order.orderNo}}</text>
+      <text class="order-status {{order.status}}">{{order.statusText}}</text>
+    </view>
+    
+    <view class="order-info-row">
+      <text class="info-label">下单时间</text>
+      <text class="info-value">{{order.createTime}}</text>
+    </view>
+    <view class="order-info-row" wx:if="{{order.completeTime}}">
+      <text class="info-label">完成时间</text>
+      <text class="info-value">{{order.completeTime}}</text>
+    </view>
+    <view class="order-info-row" wx:if="{{order.customerName}}">
+      <text class="info-label">下单人</text>
+      <text class="info-value">{{order.customerName}}</text>
+    </view>
+    <view class="order-info-row" wx:if="{{order.remark}}">
+      <text class="info-label">备注</text>
+      <text class="info-value">{{order.remark}}</text>
+    </view>
+  </view>
+
+  <!-- 订单菜品 -->
+  <view class="card">
+    <view class="card-title">订单详情</view>
+    <view class="order-items">
+      <view class="order-item-row" wx:for="{{order.items}}" wx:key="id">
+        <view class="item-info">
+          <text class="item-name">{{item.name}}</text>
+          <text class="item-quantity">x{{item.quantity}}</text>
+        </view>
+        <view class="item-actions" wx:if="{{isAdmin && order.status === 'pending'}}">
+          <button class="btn-view-recipe" bindtap="viewRecipe" data-id="{{item.recipeId}}">查看菜谱</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 操作按钮 -->
+  <view class="action-buttons" wx:if="{{isAdmin}}">
+    <button class="btn btn-success" wx:if="{{order.status === 'pending'}}" bindtap="acceptOrder">接单</button>
+    <button class="btn btn-primary" wx:if="{{order.status === 'preparing'}}" bindtap="completeOrder">出餐</button>
+  </view>
+
+  <!-- 创建订单模式 -->
+  <view class="action-buttons" wx:if="{{isCreateMode}}">
+    <button class="btn btn-primary" bindtap="createOrder">确认下单</button>
+  </view>
+</view>
+
+<!-- 创建订单弹窗 -->
+<view class="modal" wx:if="{{showCreateModal}}" bindtap="closeModal">
+  <view class="modal-content" catchtap="stopPropagation">
+    <view class="modal-title">创建订单</view>
+    
+    <view class="form-item">
+      <text class="label">备注（可选）</text>
+      <textarea class="textarea" placeholder="请输入备注信息" value="{{remark}}" bindinput="onRemarkInput" maxlength="200"></textarea>
+    </view>
+
+    <view class="modal-actions">
+      <button class="btn btn-secondary" bindtap="closeModal">取消</button>
+      <button class="btn btn-primary" bindtap="confirmCreateOrder">确认下单</button>
+    </view>
+  </view>
+</view>

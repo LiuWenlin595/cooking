@@ -1,0 +1,65 @@
+<!--pages/profile/profile.wxml-->
+<view class="container">
+  <!-- 用户信息 -->
+  <view class="user-card">
+    <image class="user-avatar" src="{{userInfo.avatarUrl || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+    <text class="user-name">{{userInfo.nickName || '未登录'}}</text>
+    <text class="user-desc" wx:if="{{isAdmin}}">管理员</text>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-list">
+    <view class="menu-item" bindtap="goToShop">
+      <view class="menu-icon">🏪</view>
+      <text class="menu-text">店铺管理</text>
+      <text class="menu-arrow">›</text>
+    </view>
+    
+    <view class="menu-item" bindtap="exportData">
+      <view class="menu-icon">📤</view>
+      <text class="menu-text">导出数据</text>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="importData">
+      <view class="menu-icon">📥</view>
+      <text class="menu-text">导入数据</text>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="clearData">
+      <view class="menu-icon">🗑️</view>
+      <text class="menu-text">清空数据</text>
+      <text class="menu-arrow">›</text>
+    </view>
+
+    <view class="menu-item" bindtap="shareApp">
+      <view class="menu-icon">🔗</view>
+      <text class="menu-text">分享小程序</text>
+      <text class="menu-arrow">›</text>
+    </view>
+  </view>
+
+  <!-- 统计信息 -->
+  <view class="stats-card">
+    <view class="card-title">数据统计</view>
+    <view class="stats-grid">
+      <view class="stat-item">
+        <text class="stat-value">{{stats.recipeCount}}</text>
+        <text class="stat-label">菜谱数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.orderCount}}</text>
+        <text class="stat-label">订单数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.ingredientCount}}</text>
+        <text class="stat-label">食材数</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.planCount}}</text>
+        <text class="stat-label">计划数</text>
+      </view>
+    </view>
+  </view>
+</view>

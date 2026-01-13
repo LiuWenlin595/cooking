@@ -1,0 +1,217 @@
+/* pages/index/index.wxss */
+
+.container {
+  padding: 0;
+}
+
+/* 店铺卡片 */
+.shop-card {
+  position: relative;
+  height: 400rpx;
+  margin-bottom: 30rpx;
+  overflow: hidden;
+}
+
+.shop-background {
+  width: 100%;
+  height: 100%;
+  filter: brightness(0.7);
+}
+
+.shop-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40rpx;
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.shop-avatar {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 60rpx;
+  border: 4rpx solid #fff;
+  margin-right: 30rpx;
+}
+
+.shop-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.shop-name {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 10rpx;
+}
+
+.shop-intro {
+  font-size: 28rpx;
+  opacity: 0.9;
+  margin-bottom: 10rpx;
+}
+
+.kitchen-tag {
+  display: inline-block;
+  padding: 6rpx 16rpx;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  width: fit-content;
+}
+
+/* 快捷功能 */
+.quick-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 40rpx 30rpx;
+  background-color: #fff;
+  margin-bottom: 30rpx;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24rpx;
+  color: #666;
+}
+
+.action-icon {
+  font-size: 60rpx;
+  margin-bottom: 10rpx;
+}
+
+/* 区块标题 */
+.section {
+  margin-bottom: 30rpx;
+}
+
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30rpx 20rpx;
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.more {
+  font-size: 26rpx;
+  color: #999;
+  font-weight: normal;
+}
+
+/* 菜谱横向滚动 */
+.recipe-scroll {
+  white-space: nowrap;
+  padding: 0 30rpx;
+}
+
+.recipe-item {
+  display: inline-block;
+  width: 280rpx;
+  margin-right: 20rpx;
+  vertical-align: top;
+}
+
+.recipe-image {
+  width: 100%;
+  height: 200rpx;
+  border-radius: 10rpx;
+}
+
+.recipe-info {
+  padding: 15rpx 0;
+}
+
+.recipe-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5rpx;
+}
+
+.recipe-category {
+  font-size: 24rpx;
+  color: #999;
+}
+
+/* 订单列表 */
+.order-list {
+  padding: 0 30rpx;
+}
+
+.order-item {
+  background-color: #fff;
+  border-radius: 10rpx;
+  padding: 25rpx;
+  margin-bottom: 20rpx;
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15rpx;
+}
+
+.order-time {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.order-status {
+  font-size: 24rpx;
+  padding: 6rpx 16rpx;
+  border-radius: 20rpx;
+}
+
+.order-status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.order-status.preparing {
+  background-color: #d1ecf1;
+  color: #0c5460;
+}
+
+.order-status.ready {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.order-items {
+  font-size: 28rpx;
+  color: #666;
+}
+
+/* 菜谱网格 */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20rpx;
+  padding: 0 30rpx;
+}
+
+.recipe-card {
+  background-color: #fff;
+  border-radius: 10rpx;
+  overflow: hidden;
+}
+
+.recipe-card .recipe-image {
+  width: 100%;
+  height: 180rpx;
+}
+
+.recipe-card .recipe-name {
+  padding: 15rpx;
+  font-size: 26rpx;
+  text-align: center;
+}

@@ -1,0 +1,54 @@
+<!--pages/recipe/list/list.wxml-->
+<view class="container">
+  <!-- 搜索栏 -->
+  <view class="search-bar">
+    <input class="search-input" placeholder="搜索菜谱..." value="{{searchKeyword}}" bindinput="onSearchInput" />
+    <view class="search-icon">🔍</view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <scroll-view class="category-scroll" scroll-x="true">
+    <view class="category-item {{currentCategory === '' ? 'active' : ''}}" bindtap="filterByCategory" data-category="">
+      全部
+    </view>
+    <view class="category-item {{currentCategory === item ? 'active' : ''}}" 
+          wx:for="{{categories}}" 
+          wx:key="*this" 
+          bindtap="filterByCategory" 
+          data-category="{{item}}">
+      {{item}}
+    </view>
+  </scroll-view>
+
+  <!-- 操作栏 -->
+  <view class="action-bar">
+    <button class="btn btn-primary" bindtap="randomRecipe">🎲 随机点菜</button>
+    <button class="btn btn-success" wx:if="{{isAdmin}}" bindtap="addRecipe">+ 添加菜谱</button>
+  </view>
+
+  <!-- 菜谱列表 -->
+  <view class="recipe-list" wx:if="{{filteredRecipes.length > 0}}">
+    <view class="recipe-item" wx:for="{{filteredRecipes}}" wx:key="id" bindtap="viewRecipe" data-id="{{item.id}}">
+      <image class="recipe-image" src="{{item.image || '/images/default-recipe.png'}}" mode="aspectFill"></image>
+      <view class="recipe-content">
+        <view class="recipe-header">
+          <text class="recipe-name">{{item.name}}</text>
+          <text class="recipe-tag required" wx:if="{{item.isRequired}}">必点</text>
+        </view>
+        <text class="recipe-category">{{item.category}}</text>
+        <text class="recipe-desc">{{item.description || '暂无描述'}}</text>
+        <view class="recipe-footer">
+          <text class="recipe-info">👥 {{item.servings || 1}}人份</text>
+          <text class="recipe-info">⏱ {{item.cookTime || '未知'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:else>
+    <view class="empty-icon">🍽</view>
+    <text>暂无菜谱</text>
+    <button class="btn btn-primary" wx:if="{{isAdmin}}" bindtap="addRecipe" style="margin-top: 30rpx;">添加第一个菜谱</button>
+  </view>
+</view>

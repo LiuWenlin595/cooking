@@ -1,0 +1,173 @@
+/* pages/ingredient/ingredient.wxss */
+
+.action-bar {
+  display: flex;
+  gap: 20rpx;
+  margin-bottom: 30rpx;
+}
+
+.action-bar .btn {
+  flex: 1;
+}
+
+.ingredient-list {
+  margin-top: 20rpx;
+}
+
+.ingredient-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 15rpx;
+  padding: 30rpx;
+  margin-bottom: 25rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.ingredient-info {
+  flex: 1;
+}
+
+.ingredient-name {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 15rpx;
+  display: block;
+}
+
+.ingredient-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.ingredient-quantity {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.ingredient-expiry {
+  font-size: 26rpx;
+  color: #666;
+}
+
+.expiry-warning {
+  color: #e74c3c;
+  font-weight: bold;
+  margin-left: 10rpx;
+}
+
+.ingredient-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15rpx;
+  margin-left: 20rpx;
+}
+
+.btn-small {
+  font-size: 24rpx;
+  padding: 10rpx 20rpx;
+  border-radius: 8rpx;
+  border: none;
+  white-space: nowrap;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
+/* 弹窗样式 */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  width: 80%;
+  max-width: 600rpx;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 40rpx;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modal-content.large {
+  width: 90%;
+  max-width: 700rpx;
+}
+
+.modal-title {
+  font-size: 32rpx;
+  font-weight: bold;
+  margin-bottom: 30rpx;
+  text-align: center;
+}
+
+.form-row {
+  display: flex;
+  gap: 20rpx;
+}
+
+.form-item-half {
+  flex: 1;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 20rpx;
+  margin-top: 30rpx;
+}
+
+.modal-actions .btn {
+  flex: 1;
+}
+
+.recipes-scroll {
+  max-height: 500rpx;
+}
+
+.recipe-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.recipe-item:last-child {
+  border-bottom: none;
+}
+
+.recipe-image {
+  width: 120rpx;
+  height: 120rpx;
+  border-radius: 10rpx;
+  margin-right: 20rpx;
+}
+
+.recipe-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-name {
+  font-size: 28rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+
+.recipe-category {
+  font-size: 24rpx;
+  color: #999;
+}

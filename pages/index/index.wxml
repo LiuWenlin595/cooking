@@ -1,0 +1,88 @@
+<!--pages/index/index.wxml-->
+<view class="container">
+  <!-- 店铺信息卡片 -->
+  <view class="shop-card" wx:if="{{shopInfo}}">
+    <image class="shop-background" src="{{shopInfo.background || '/images/default-bg.jpg'}}" mode="aspectFill"></image>
+    <view class="shop-info">
+      <image class="shop-avatar" src="{{shopInfo.avatar || '/images/default-avatar.png'}}" mode="aspectFill"></image>
+      <view class="shop-details">
+        <text class="shop-name">{{shopInfo.name}}</text>
+        <text class="shop-intro">{{shopInfo.intro}}</text>
+        <view class="kitchen-tag" wx:if="{{currentKitchen}}">
+          <text>{{currentKitchen.name}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 快捷功能 -->
+  <view class="quick-actions">
+    <view class="action-item" bindtap="goToOrder">
+      <view class="action-icon">📋</view>
+      <text>点菜下单</text>
+    </view>
+    <view class="action-item" bindtap="goToRecipeList">
+      <view class="action-icon">📖</view>
+      <text>查看菜谱</text>
+    </view>
+    <view class="action-item" bindtap="goToIngredient">
+      <view class="action-icon">🥬</view>
+      <text>食材管理</text>
+    </view>
+    <view class="action-item" bindtap="goToMealPlan">
+      <view class="action-icon">📅</view>
+      <text>饮食计划</text>
+    </view>
+  </view>
+
+  <!-- 今日推荐 -->
+  <view class="section">
+    <view class="section-title">
+      <text>今日推荐</text>
+      <text class="more" bindtap="goToRecipeList">更多 ></text>
+    </view>
+    <scroll-view class="recipe-scroll" scroll-x="true">
+      <view class="recipe-item" wx:for="{{recommendedRecipes}}" wx:key="id" bindtap="viewRecipe" data-id="{{item.id}}">
+        <image class="recipe-image" src="{{item.image || '/images/default-recipe.png'}}" mode="aspectFill"></image>
+        <view class="recipe-info">
+          <text class="recipe-name">{{item.name}}</text>
+          <text class="recipe-category">{{item.category}}</text>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 最近订单 -->
+  <view class="section" wx:if="{{recentOrders.length > 0}}">
+    <view class="section-title">
+      <text>最近订单</text>
+      <text class="more" bindtap="goToOrderList">查看全部 ></text>
+    </view>
+    <view class="order-list">
+      <view class="order-item" wx:for="{{recentOrders}}" wx:key="id" bindtap="viewOrder" data-id="{{item.id}}">
+        <view class="order-header">
+          <text class="order-time">{{item.createTime}}</text>
+          <text class="order-status {{item.status}}">{{item.statusText}}</text>
+        </view>
+        <view class="order-items">
+          <text wx:for="{{item.items}}" wx:key="id" wx:for-item="orderItem">
+            {{orderItem.name}} x{{orderItem.quantity}}
+          </text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 可做菜谱提示 -->
+  <view class="section" wx:if="{{availableRecipes.length > 0}}">
+    <view class="section-title">
+      <text>根据现有食材可做</text>
+    </view>
+    <view class="recipe-grid">
+      <view class="recipe-card" wx:for="{{availableRecipes}}" wx:key="id" bindtap="viewRecipe" data-id="{{item.id}}">
+        <image class="recipe-image" src="{{item.image || '/images/default-recipe.png'}}" mode="aspectFill"></image>
+        <view class="recipe-name">{{item.name}}</view>
+      </view>
+    </view>
+  </view>
+</view>

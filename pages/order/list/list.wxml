@@ -1,0 +1,52 @@
+<!--pages/order/list/list.wxml-->
+<view class="container">
+  <!-- 状态筛选 -->
+  <scroll-view class="status-scroll" scroll-x="true">
+    <view class="status-item {{currentStatus === '' ? 'active' : ''}}" bindtap="filterByStatus" data-status="">
+      全部
+    </view>
+    <view class="status-item {{currentStatus === item.value ? 'active' : ''}}" 
+          wx:for="{{statusList}}" 
+          wx:key="value" 
+          bindtap="filterByStatus" 
+          data-status="{{item.value}}">
+      {{item.label}}
+    </view>
+  </scroll-view>
+
+  <!-- 订单列表 -->
+  <view class="order-list" wx:if="{{filteredOrders.length > 0}}">
+    <view class="order-item" wx:for="{{filteredOrders}}" wx:key="id" bindtap="viewOrder" data-id="{{item.id}}">
+      <view class="order-header">
+        <view class="order-info">
+          <text class="order-id">订单 #{{item.orderNo}}</text>
+          <text class="order-time">{{item.createTime}}</text>
+        </view>
+        <text class="order-status {{item.status}}">{{item.statusText}}</text>
+      </view>
+      
+      <view class="order-items">
+        <view class="order-item-row" wx:for="{{item.items}}" wx:key="id" wx:for-item="orderItem">
+          <text class="item-name">{{orderItem.name}}</text>
+          <text class="item-quantity">x{{orderItem.quantity}}</text>
+        </view>
+      </view>
+
+      <view class="order-footer">
+        <text class="order-total">共 {{item.totalQuantity}} 道菜</text>
+        <view class="order-actions" wx:if="{{isAdmin && item.status === 'pending'}}">
+          <button class="btn-small btn-success" catchtap="acceptOrder" data-id="{{item.id}}">接单</button>
+        </view>
+        <view class="order-actions" wx:if="{{isAdmin && item.status === 'preparing'}}">
+          <button class="btn-small btn-primary" catchtap="completeOrder" data-id="{{item.id}}">出餐</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty" wx:else>
+    <view class="empty-icon">📋</view>
+    <text>暂无订单</text>
+  </view>
+</view>
